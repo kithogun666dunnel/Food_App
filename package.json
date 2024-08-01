@@ -1,0 +1,40 @@
+{
+  "name": "food-app",
+  "version": "1.0.0",
+  "description": "this is food app from namastey react",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "lint": "eslint.",
+    "precommit": "lint-staged",
+    "prepush": "npm test",
+    "pretest": "npm run lint",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kithogun666dunnel/food_APP.git"
+  },
+  "keywords": [
+    "react",
+    "app",
+    "project"
+  ],
+  "author": "pankaj kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kithogun666dunnel/food_APP/issues"
+  },
+  "homepage": "https://github.com/kithogun666dunnel/food_APP#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "browserslist": [
+    "last 10 Chrome version"
+  ]
+}
