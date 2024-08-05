@@ -8,7 +8,7 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <h2>kya khaogi harsha jii</h2>
+          
           <li>Home</li>
           <li>About Us</li>
           <li>Contact Us</li>
