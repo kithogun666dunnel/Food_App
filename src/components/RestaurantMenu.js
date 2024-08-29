@@ -1,44 +1,54 @@
-
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
+import { MENU_API } from "../utils/constants";
+
 const RestaurantMenu = () => {
-  const [resInfo , setResInfo] = useState(null);
+  const { resId } = useParams(); // Correctly destructure resId from useParams
+  const [resInfo, setResInfo] = useState(null);
 
   useEffect(() => {
     fetchMenu();
-   } , []);
+  }, []);
 
- const fetchMenu = async () => {
-  const data = await fetch(
-    "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=425&catalog_qa=undefined&submitAction=ENTER"
-  );
-  const json = await data.json();
+  const fetchMenu = async () => {
+    const data = await fetch(
+    MENU_API + resId
+    );
+    const json = await data.json();
+    console.log(json); // Debugging line to check the response
+    setResInfo(json.data);
+  };
 
-  console.log(json);  
-  setResInfo(json.data); 
- };
- if (!resInfo ) 
-    <Shimmer />
-  
- const { name, cuisines, costForTwoMessage } =
-   resInfo?.cards[2]?.card?.card?.info;
+  if (resInfo === null) return <Shimmer />;
 
- const{itemCards} = resInfo?.cards[2].groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+  const { name, cuisines, costForTwoMessage } =
+    resInfo.cards[2].card?.card?.info;
+
+  const { itemCards } =
+    resInfo?.cards[4].groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
 
   return (
-    <div className="menu">
-      <h1>{name}</h1>
-      <p>
-        {cuisines.join(", ")} - {costForTwoMessage}
+    <div className="p-8 bg-gray-50 min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">{name}</h1>
+      <p className="text-lg mb-4">
+        {cuisines ? cuisines.join(", ") : "Cuisines not available"} -{" "}
+        {costForTwoMessage || "Cost information not available"}
       </p>
-      <h3>Menu</h3>
-      <ul>
-        {itemCards.map((item) => (
-          <li>
-            {item.card.info.name} -{" "}
-            {item.card.info.price / 100 || item.card.info.dafaultprice / 100}
-          </li>
-        ))}
+      <h2 className="text-xl font-semibold mb-4">Menu</h2>
+      <ul className="space-y-2">
+        {itemCards.length > 0 ? (
+          itemCards.map((res, index) => (
+            <li
+              key={index}
+              className="bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 transition-all duration-200 ease-in-out"
+            >
+              {res.card.info.name}
+            </li>
+          ))
+        ) : (
+          <li className="text-gray-500 italic">No menu items available</li>
+        )}
       </ul>
     </div>
   );
