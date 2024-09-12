@@ -9,7 +9,8 @@ function Contact() {
         <input type="text" placeholder="Your Name" />
         <input type="email" placeholder="Your Email" />
         <textarea placeholder="Your Message" rows="4" />
-        <button type="submit">Send Message</button>
+        
+   <button className="bg-magenta-500 hover:bg-magenta-600 text-white" type="submit">Send Message</button>
       </form>
     </div>
   );

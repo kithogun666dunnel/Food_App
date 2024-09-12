@@ -28,11 +28,11 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="p-8">
-      <div className="filter mb-8">
-        <div className="search flex space-x-4">
+      <div className="mb-8 filter">
+        <div className="flex space-x-4 search">
           <input
             type="text"
-            className="search-box w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border-gray-300 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 w-full search-box focus:outline-none"
             placeholder="Search Restaurant By Name"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -44,24 +44,26 @@ const Body = () => {
               );
               setFilteredRestaurant(filterRestaurants);
             }}
-            className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md focus:outline-none"
+            className="bg-green-400 hover:bg-gray-300 m-4 px-4 py-2 rounded-lg text-gray-700 filter-btn focus:outline-none"
           >
             Search
           </button>
         </div>
-        <button
-          className="filter-btn mt-4 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md focus:outline-none"
+        <div className="m-4 p-4 search">
+          <button
+          className="bg-green-400 hover:bg-gray-300 m-4 px-4 py-2 rounded-lg text-gray-700 filter-btn focus:outline-none"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRating > 4.2
             );
-            setFilteredRestaurant(filteredList);
+            setFilteredRestaurant(filteredList); 
           }}
         >
           Top Rated Restaurant
         </button>
+        </div>
       </div>
-      <div className="res-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="flex flex-wrap">
         {filteredRestaurant.map((restaurant) => (
           <Link
             key={restaurant?.info?.id}

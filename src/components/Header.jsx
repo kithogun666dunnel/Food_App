@@ -8,11 +8,11 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   return (
-    <div className="flex justify-between bg-pink-100 shadow-lg ">
+    <div className="flex justify-between bg-pink-100 shadow-lg">
       <div className="logo-container">
         <img className="w-56" src={LOGO_URL} alt="Logo" />
       </div>
-      <div className="felx items-center">
+      <div className="items-center felx">
         <ul className="flex justify-between">
           <li className="px-4">
             ONLINE STATUS:{" "}
